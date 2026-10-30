@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BarChart3, BellRing, Bus, CircleDollarSign, ContactRound, FileClock, FileText, History, LayoutDashboard, ReceiptText, ShieldCheck, UserRound, Users, Wallet, Wrench } from "lucide-react";
+import { BarChart3, BellRing, Bus, CircleDollarSign, ContactRound, FileClock, FileText, History, LayoutDashboard, ReceiptText, Route, ShieldCheck, UserRound, Users, Wallet, Wrench } from "lucide-react";
 
 type NavItem = { href: string; label: string; icon: typeof LayoutDashboard; permission?: string; anyPermissions?: string[] };
 const items: NavItem[] = [
@@ -10,6 +10,7 @@ const items: NavItem[] = [
   { href: "/dashboard/profile", label: "My profile", icon: UserRound },
   { href: "/dashboard/buses", label: "Buses", icon: Bus, permission: "buses.manage" },
   { href: "/dashboard/employees", label: "Employees", icon: ContactRound, permission: "employees.manage" },
+  { href: "/dashboard/route-trips", label: "Routes & trips", icon: Route, permission: "settings.manage" },
   { href: "/dashboard/income", label: "Income", icon: Wallet, anyPermissions: ["income.create", "income.view"] },
   { href: "/dashboard/expenses", label: "Expenses", icon: ReceiptText, anyPermissions: ["expense.create", "expense.view"] },
   { href: "/dashboard/reports", label: "Reports", icon: BarChart3, permission: "reports.view" },

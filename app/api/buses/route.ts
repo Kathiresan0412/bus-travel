@@ -14,7 +14,7 @@ export async function GET() {
     const user = (await User.findById(gate.session!.user.id).select("assignedBus").lean()) as unknown as { assignedBus?: unknown } | null;
     filter._id = user?.assignedBus ?? null;
   }
-  const buses = await Bus.find(filter).select("name registrationNumber route status currentOdometerKm assignedDriver assignedConductor").sort({ name: 1 }).lean();
+  const buses = await Bus.find(filter).sort({ name: 1 }).lean();
   return NextResponse.json({ buses });
 }
 export async function POST(request: NextRequest) {
