@@ -92,6 +92,7 @@ export async function getReport(type: ReportType, filters: ReportFilters) {
 }
 
 export async function getDashboardSummary() {
+  await connectDB();
   const todayText = businessDateString(); const today = dateOnly(todayText)!; const tomorrow = new Date(today); tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
   const monthStart = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), 1)); const lastMonthStart = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth() - 1, 1));
   const [todayRows, currentMonth, lastMonth, trend, buses, activeBuses] = await Promise.all([
