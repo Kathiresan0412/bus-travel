@@ -41,7 +41,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (user) { token.userId = user.id; token.role = user.role; token.permissions = user.permissions; }
       if (trigger === "update" && token.userId) {
         await connectDB();
-        const currentUser = await User.findOne({ _id: token.userId, isActive: true, deletedAt: null }).select("name email role").lean();
+        const currentUser = await User.findOne({ _id: token.userId, isActive: true, deletedAt: null }).select("name email role").lean() as unknown as { name: string; email: string; role: unknown } | null;
         if (currentUser) {
           const role = (await Role.findById(String(currentUser.role)).lean()) as unknown as { name: string; permissions: string[] } | null;
           if (role) { token.name = currentUser.name; token.email = currentUser.email; token.role = role.name; token.permissions = role.permissions; }
