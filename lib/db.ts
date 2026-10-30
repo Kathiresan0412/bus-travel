@@ -8,7 +8,7 @@ const cache = globalWithMongoose.mongooseCache ??= { conn: null, promise: null }
 
 export async function connectDB() {
   if (cache.conn) return cache.conn;
-  if (!cache.promise) cache.promise = mongoose.connect(uri, { bufferCommands: false });
+  if (!cache.promise) cache.promise = mongoose.connect(uri!, { bufferCommands: false });
   try { cache.conn = await cache.promise; }
   catch (error) { cache.promise = null; throw error; }
   return cache.conn;

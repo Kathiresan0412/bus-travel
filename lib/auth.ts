@@ -31,7 +31,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         return null;
       }
       await LoginAttempt.deleteOne({ key });
-      const role = await Role.findById(user.role).lean();
+      const role = (await Role.findById(user.role).lean()) as unknown as { name: string; permissions: string[] } | null;
       if (!role) return null;
       return { id: user.id, name: user.name, email: user.email, role: role.name, permissions: role.permissions };
     }

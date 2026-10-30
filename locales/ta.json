@@ -1,0 +1,6 @@
+{
+  "appName": "RouteLedger",
+  "navigation": { "overview": "கண்ணோட்டம்", "buses": "பேருந்துகள்", "employees": "ஊழியர்கள்", "income": "வருமானம்", "expenses": "செலவுகள்", "reports": "அறிக்கைகள்", "salaries": "சம்பளம் மற்றும் முன்பணம்", "loans": "கடன்கள்", "maintenance": "பராமரிப்பு", "documents": "ஆவணங்கள்", "reminders": "நினைவூட்டல்கள்", "import": "குறிப்பேடு இறக்குமதி", "audit": "செயல் வரலாறு" },
+  "actions": { "save": "சேமி", "cancel": "ரத்து செய்", "search": "தேடு", "previous": "முந்தையது", "next": "அடுத்து" },
+  "messages": { "empty": "பதிவுகள் இல்லை", "loading": "ஏற்றப்படுகிறது…", "error": "ஏதோ தவறு நடந்தது" }
+}

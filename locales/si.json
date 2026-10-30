@@ -1,0 +1,6 @@
+{
+  "appName": "RouteLedger",
+  "navigation": { "overview": "සාරාංශය", "buses": "බස් රථ", "employees": "සේවකයින්", "income": "ආදායම්", "expenses": "වියදම්", "reports": "වාර්තා", "salaries": "වැටුප් සහ අත්තිකාරම්", "loans": "ණය", "maintenance": "නඩත්තුව", "documents": "ලේඛන", "reminders": "මතක් කිරීම්", "import": "සටහන් ආයාතය", "audit": "වෙනස්කම් ඉතිහාසය" },
+  "actions": { "save": "සුරකින්න", "cancel": "අවලංගු කරන්න", "search": "සොයන්න", "previous": "පෙර", "next": "ඊළඟ" },
+  "messages": { "empty": "තවම වාර්තා නැත", "loading": "පූරණය වෙමින්…", "error": "දෝෂයක් ඇති විය" }
+}

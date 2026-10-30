@@ -1,0 +1,6 @@
+{
+  "appName": "RouteLedger",
+  "navigation": { "overview": "Overview", "buses": "Buses", "employees": "Employees", "income": "Income", "expenses": "Expenses", "reports": "Reports", "salaries": "Salary & advances", "loans": "Loans", "maintenance": "Maintenance", "documents": "Documents", "reminders": "Reminders", "import": "Notebook import", "audit": "Audit history" },
+  "actions": { "save": "Save", "cancel": "Cancel", "search": "Search", "previous": "Previous", "next": "Next" },
+  "messages": { "empty": "No records yet", "loading": "Loading…", "error": "Something went wrong" }
+}

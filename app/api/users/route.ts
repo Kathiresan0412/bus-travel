@@ -7,6 +7,7 @@ import { passwordSchema } from "@/validations/auth";
 import User from "@/models/User";
 import Role from "@/models/Role";
 import AuditLog from "@/models/AuditLog";
+import Bus from "@/models/Bus";
 
 const createUserSchema = z.object({ name: z.string().trim().min(1).max(100), email: z.string().trim().email().max(254).transform(v => v.toLowerCase()), password: passwordSchema, role: z.string().regex(/^[a-f\d]{24}$/i), assignedBus: z.string().regex(/^[a-f\d]{24}$/i).nullable().optional() });
 export async function GET() {
@@ -20,7 +21,10 @@ export async function POST(request: NextRequest) {
   const parsed = createUserSchema.safeParse(await request.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "Invalid user details", details: parsed.error.flatten() }, { status: 400 });
   await connectDB();
-  if (!(await Role.exists({ _id: parsed.data.role }))) return NextResponse.json({ error: "Role not found" }, { status: 400 });
+  const role = (await Role.findById(parsed.data.role).lean()) as unknown as { name: string } | null;
+  if (!role) return NextResponse.json({ error: "Role not found" }, { status: 400 });
+  if (role.name === "driver" && !parsed.data.assignedBus) return NextResponse.json({ error: "Assign a bus to driver accounts" }, { status: 400 });
+  if (parsed.data.assignedBus && !(await Bus.exists({ _id: parsed.data.assignedBus, deletedAt: null, status: { $ne: "sold" } }))) return NextResponse.json({ error: "Assigned bus not found" }, { status: 400 });
   const duplicate = await User.exists({ email: parsed.data.email });
   if (duplicate) return NextResponse.json({ error: "Email is already in use" }, { status: 409 });
   const user = await User.create({ name: parsed.data.name, email: parsed.data.email, passwordHash: await bcrypt.hash(parsed.data.password, 12), role: parsed.data.role, assignedBus: parsed.data.assignedBus ?? null, createdBy: gate.session!.user.id, updatedBy: gate.session!.user.id });

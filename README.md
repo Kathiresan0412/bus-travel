@@ -1,6 +1,45 @@
 # RouteLedger · Bus Finance Manager
 
-A mobile-first finance workspace for small bus operators. Phase 1 establishes the Next.js application, MongoDB models, credentials authentication, database-backed roles and permissions, and owner-managed team access. Daily bus operations are delivered in the following phases.
+A mobile-first finance workspace for small bus operators, built to replace the notebook used for daily income and expense tracking.
+
+## Project status
+
+### Done — Phase 1: foundation, authentication and access
+
+- Next.js App Router, TypeScript, Tailwind CSS and MongoDB/Mongoose setup.
+- Cached Mongoose connection for serverless deployments.
+- Credentials sign-in with bcrypt password hashes, JWT sessions, secure HTTP-only cookies and an eight-hour session lifetime.
+- Login-attempt throttling and server-side password validation for accounts created through the owner interface and seed.
+- Database models for users, roles, permissions, audit logs, settings and login attempts.
+- Seeded Owner, Manager/Accountant, Driver/Conductor and Viewer roles, permissions and the initial owner account.
+- Owner dashboard, team list and account creation screen.
+- Permission-guard helper and owner-protected user and role read routes.
+- Local setup and Vercel deployment instructions.
+
+### In progress — Phase 2: daily bus operations
+
+- Bus and employee create/list screens, daily income and expense entry, categories and shared expense allocation.
+- Driver records are server-scoped to their assigned bus and today's Colombo date.
+- Editing/restoring records, receipt uploads, quick-add defaults and owner date unlock are still pending.
+
+### In progress — Phase 3: dashboard and reports
+
+- Dashboard totals, month comparison, bus ranking and charts.
+- Aggregation reports for daily, monthly, yearly, bus-wise, category and fuel summaries; bus comparison and CSV/Excel/PDF/print exports.
+- Category/employee/date-preset filters are available. Report verification against broader real-world data remains pending.
+
+### In progress — Phase 4: operations and reminders
+
+- Salary and advance records, monthly bus loan installments, maintenance schedules, document expiry records and due-date reminders.
+- Paid salary and loan amounts are not yet included in profit/loss totals; reminder email is also pending.
+
+### In progress — Phase 5: import and finishing work
+
+- CSV/XLSX notebook import with column mapping, preview, server validation and row-level results.
+- Audit history browsing with filters and change details; search, sorting and pagination for fleet and finance tables.
+- English/Sinhala/Tamil translation dictionaries are in place; applying translations across the UI and record restore flows remain.
+
+See [FEATURE.md](./FEATURE.md) for the current done/not-done checklist. Run `npm run seed` after permission changes so the database receives the new `imports.manage` permission; users should sign out and back in afterward.
 
 ## Requirements
 
@@ -22,14 +61,7 @@ A mobile-first finance workspace for small bus operators. Phase 1 establishes th
 4. Open `http://localhost:3000` and sign in with `SEED_ADMIN_EMAIL` and `SEED_ADMIN_PASSWORD`.
 
 The seed is repeatable: it upserts system roles and permissions and creates the owner only if that email does not already exist. It does not overwrite an existing owner password.
-
-## Phase 1 features
-
-- Auth.js credentials login with bcrypt password hashes, JWT sessions, secure HTTP-only cookies and an eight-hour session lifetime.
-- MongoDB-backed users, roles, permissions, audit logs and business settings schemas.
-- Server-side `requirePermission` guard for protected route handlers, with owner-only user and role inspection endpoints.
-- Owner team page for creating manager, driver and viewer accounts.
-- Seeded role and permission matrix. Driver bus/day scoping is enforced alongside operational endpoints as those arrive in Phase 2.
+Run `npm run seed` again after permission or category updates to sync those changes to MongoDB. Set `SEED_SAMPLE_BUSES=true` if you want four clearly labeled demo buses for a test database. Existing users should sign out and back in after role permissions are updated.
 
 ## Deploy to Vercel
 

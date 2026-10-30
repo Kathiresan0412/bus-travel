@@ -1,0 +1,3 @@
+import { model, models, Schema, Types } from "mongoose";
+const ExpenseCategorySchema = new Schema({ name: { type: String, required: true, trim: true, maxlength: 80 }, slug: { type: String, required: true, unique: true }, isDefault: { type: Boolean, default: false }, isActive: { type: Boolean, default: true }, createdBy: { type: Types.ObjectId, ref: "User", default: null }, updatedBy: { type: Types.ObjectId, ref: "User", default: null }, deletedAt: { type: Date, default: null } }, { timestamps: true, versionKey: false });
+export default models.ExpenseCategory || model("ExpenseCategory", ExpenseCategorySchema);
